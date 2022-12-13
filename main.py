@@ -4,18 +4,21 @@ from bs4 import BeautifulSoup
 from fake_headers import Headers
 import json
 from pprint import pprint
+import datetime
+from exercise_2 import logger
+
 
 headers = Headers(os='lin', browser="firefox")
 
 
-
+@logger('get_html.log')
 def get_html(url):
 
     html = requests.get(url, headers=headers.generate()).text
     
     return html
 
-
+@logger('pars.log')
 def pars(html):
     soup = BeautifulSoup(html, features='lxml')
     results = soup.find_all(class_='serp-item')
